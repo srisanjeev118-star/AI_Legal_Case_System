@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Case Analysis</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .brand h2 {
+            font-size: 20px;
+        }
+
+        .brand p {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 3px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: white;
+            background: #374151;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .page-title {
+            margin-bottom: 22px;
+        }
+
+        .page-title h1 {
+            font-size: 28px;
+            color: #111827;
+        }
+
+        .page-title p {
+            color: #6b7280;
+            margin-top: 7px;
+        }
+
+        .case-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid #e5e7eb;
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .case-number {
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .case-title {
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .status {
+            background: #eff6ff;
+            color: #2563eb;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .case-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .meta-box {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .meta-label {
+            font-size: 11px;
+            color: #6b7280;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .meta-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .ai-icon {
+            width: 46px;
+            height: 46px;
+            background: #eef2ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .ai-header h2 {
+            font-size: 20px;
+        }
+
+        .ai-header p {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .analysis-box {
+            background: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            padding: 15px 17px;
+            border-radius: 10px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .footer-actions {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            padding: 11px 17px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        @media (max-width: 800px) {
+            .case-header {
+                flex-direction: column;
+            }
+
+            .case-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 15px 18px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+        /* =========================================================
+   AI CASE ANALYSIS - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 18px 35px;
+    box-shadow: 0 8px 25px rgba(15,23,42,0.16);
+}
+
+.brand-icon {
+    background: linear-gradient(135deg, #2563eb, #6366f1);
+    box-shadow: 0 6px 15px rgba(37,99,235,0.25);
+}
+
+.brand h2 {
+    font-weight: 800;
+}
+
+.back-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
+/* Main */
+.container {
+    max-width: 1200px;
+    margin-top: 35px;
+}
+
+/* Page title */
+.page-title {
+    margin-bottom: 28px;
+}
+
+.page-title h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.page-title p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Cards */
+.case-card {
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 32px rgba(15,23,42,0.07);
+    transition: all 0.25s ease;
+}
+
+.case-card:hover {
+    box-shadow: 0 16px 38px rgba(15,23,42,0.10);
+}
+
+/* Case header */
+.case-number {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.case-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.status {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    box-shadow: 0 4px 10px rgba(37,99,235,0.08);
+}
+
+/* Case metadata */
+.case-meta {
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.meta-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
+}
+
+.meta-box:hover {
+    border-color: #bfdbfe;
+    background: #f8fbff;
+    transform: translateY(-2px);
+}
+
+.meta-label {
+    color: #64748b;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.meta-value {
+    color: #1e293b;
+    font-weight: 800;
+}
+
+/* AI section */
+.ai-header {
+    padding-bottom: 18px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.ai-icon {
+    background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+    border: 1px solid #c7d2fe;
+    box-shadow: 0 5px 13px rgba(79,70,229,0.10);
+}
+
+.ai-header h2 {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ai-header p {
+    color: #64748b;
+}
+
+/* Analysis result */
+.analysis-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    padding: 26px;
+    line-height: 1.85;
+    font-size: 14px;
+    color: #334155;
+    box-shadow: inset 0 1px 3px rgba(15,23,42,0.03);
+}
+
+/* Disclaimer */
+.disclaimer {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    color: #92400e;
+    box-shadow: 0 4px 12px rgba(146,64,14,0.05);
+}
+
+/* Buttons */
+.footer-actions {
+    margin-top: 25px;
+}
+
+.btn {
+    border-radius: 9px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    box-shadow: 0 6px 15px rgba(37,99,235,0.18);
+}
+
+.secondary-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(15,23,42,0.12);
+}
+
+.secondary-btn:hover {
+    background: #e2e8f0;
+}
+
+/* Print */
+@media print {
+
+    .header {
+        background: #111827 !important;
+        box-shadow: none;
+    }
+
+    .back-btn,
+    .footer-actions {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .case-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+
+    .header {
+        padding: 15px 18px;
+    }
+
+    .container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .case-card {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .page-title h1 {
+        font-size: 27px;
+    }
+
+    .case-title {
+        font-size: 21px;
+    }
+
+    .case-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .case-header {
+        gap: 14px;
+    }
+
+    .footer-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="brand">
+        <div class="brand-icon">🤖</div>
+
+        <div>
+            <h2>AI Legal Case Management</h2>
+            <p>AI-powered case analysis</p>
+        </div>
+    </div>
+
+    <a href="{{ url_for('case_details', case_id=case['case_id']) }}"
+       class="back-btn">
+        ← Back to Case
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+        <h1>AI Case Analysis</h1>
+        <p>AI-generated analysis based only on the information available in this case.</p>
+    </div>
+
+
+    <!-- CASE INFORMATION -->
+
+    <section class="case-card">
+
+        <div class="case-header">
+
+            <div>
+                <div class="case-number">
+                    {{ case['case_number'] }}
+                </div>
+
+                <h2 class="case-title">
+                    {{ case['title'] }}
+                </h2>
+            </div>
+
+            <div class="status">
+                {{ case['status'] or 'Pending' }}
+            </div>
+
+        </div>
+
+
+        <div class="case-meta">
+
+            <div class="meta-box">
+                <div class="meta-label">
+                    Case Type
+                </div>
+
+                <div class="meta-value">
+                    {{ case['case_type'] or 'N/A' }}
+                </div>
+            </div>
+
+
+            <div class="meta-box">
+                <div class="meta-label">
+                    Case Status
+                </div>
+
+                <div class="meta-value">
+                    {{ case['status'] or 'N/A' }}
+                </div>
+            </div>
+
+
+            <div class="meta-box">
+                <div class="meta-label">
+                    Case Number
+                </div>
+
+                <div class="meta-value">
+                    {{ case['case_number'] }}
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI ANALYSIS -->
+
+    <section class="case-card">
+
+        <div class="ai-header">
+
+            <div class="ai-icon">
+                🤖
+            </div>
+
+            <div>
+                <h2>AI Analysis Result</h2>
+
+                <p>
+                    Generated from the case information provided to the AI.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="analysis-box">
+{{ ai_result }}
+        </div>
+
+
+        <div class="disclaimer">
+
+            ⚠️ <strong>Important:</strong>
+
+            This AI analysis is provided for general case-management
+            and informational purposes only. It is not legal advice,
+            does not replace a qualified lawyer, and should be independently
+            verified before making legal or case-related decisions.
+
+        </div>
+
+
+        <div class="footer-actions">
+
+            <a href="{{ url_for('case_details', case_id=case['case_id']) }}"
+               class="btn primary-btn">
+                ← Back to Case
+            </a>
+
+            <button onclick="window.print()"
+                    class="btn secondary-btn">
+                🖨️ Print Analysis
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Audit Logs | AI Legal Case System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #0f172a;
+            padding: 25px 15px;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #cbd5e1;
+            padding: 13px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #1e293b;
+            color: white;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-size: 13px;
+            text-align: left;
+            padding: 13px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 13px;
+            font-size: 13px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .action {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .role {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 15px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .details {
+            max-width: 400px;
+            word-break: break-word;
+            color: #475569;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+        }
+
+        @media(max-width: 700px) {
+
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px 15px;
+            }
+
+            .menu {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+
+            .menu a {
+                margin-bottom: 0;
+            }
+        }/* =========================================================
+   AUDIT LOGS - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+    padding: 25px 15px;
+    box-shadow: 6px 0 20px rgba(15, 23, 42, 0.10);
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    padding: 12px 10px;
+}
+
+.menu a {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateX(3px);
+}
+
+.menu a.active {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Main area */
+.main {
+    padding: 35px;
+}
+
+/* Page header */
+.header {
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Main card */
+.card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.09);
+}
+
+/* Table */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+thead th {
+    background: linear-gradient(135deg, #f8fafc, #eef2ff);
+    color: #334155;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 15px;
+    border-bottom: 1px solid #dbeafe;
+}
+
+tbody td {
+    padding: 15px;
+    color: #334155;
+    border-bottom: 1px solid #e2e8f0;
+    line-height: 1.5;
+}
+
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ID column */
+tbody td:first-child {
+    font-weight: 800;
+    color: #64748b;
+}
+
+/* User name */
+tbody td:nth-child(2) {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+tbody td:nth-child(2) small {
+    color: #94a3b8;
+    font-weight: 400;
+    font-size: 11px;
+}
+
+/* Role badge */
+.role {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.06);
+}
+
+/* Action */
+.action {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #2563eb;
+    padding: 5px 9px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 800;
+    border: 1px solid #dbeafe;
+}
+
+/* Details */
+.details {
+    max-width: 400px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Date */
+tbody td:last-child {
+    color: #64748b;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+/* Empty state */
+.empty {
+    padding: 65px 20px;
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+.empty h3 {
+    color: #334155;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.empty p {
+    color: #64748b;
+}
+
+/* Back button */
+.back-btn {
+    margin-top: 22px;
+    padding: 11px 17px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: 9px;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.18);
+    transition: all 0.25s ease;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(37, 99, 235, 0.25);
+}
+
+/* Scrollbar */
+.card::-webkit-scrollbar {
+    height: 8px;
+}
+
+.card::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    .main {
+        padding: 25px 20px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .card {
+        padding: 18px;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        padding: 18px 12px;
+        box-shadow: none;
+    }
+
+    .brand {
+        margin-bottom: 18px;
+    }
+
+    .main {
+        padding: 20px 15px;
+    }
+
+    .header {
+        margin-bottom: 22px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .header p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .menu {
+        gap: 7px;
+    }
+
+    .menu a {
+        padding: 11px;
+        font-size: 13px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    table {
+        min-width: 850px;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .menu {
+        grid-template-columns: 1fr;
+    }
+
+    .main {
+        padding: 18px 12px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .back-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            ⚖️ Legal Case System
+        </div>
+
+        <nav class="menu">
+
+            <a href="/dashboard">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('cases') }}">
+                🤖 AI Assistant
+            </a>
+
+            <a href="/cases">
+                📁 Cases
+            </a>
+
+            <a href="/hearings">
+                📅 Hearings
+            </a>
+
+            <a href="/documents">
+                📄 Documents
+            </a>
+
+            <a href="/users">
+                👥 Users
+            </a>
+
+            <a href="/database">
+                🗄️ Database
+            </a>
+
+            <a href="/db-test">
+                🔌 Database Test
+            </a>
+
+            <a href="{{ url_for('audit_logs') }}"
+               class="active">
+                📋 Audit Logs
+            </a>
+
+            <a href="{{ url_for('change_password') }}">
+                🔐 Change Password
+            </a>
+
+            <a href="/logout">
+                🚪 Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>📋 Audit Logs</h1>
+
+            <p>
+                Track important activities performed in the legal case management system.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            {% if logs %}
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>Date & Time</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for log in logs %}
+
+                    <tr>
+
+                        <td>
+                            {{ log.id }}
+                        </td>
+
+                        <td>
+
+                            {{ log.user_name or "Unknown User" }}
+
+                            <br>
+
+                            <small>
+                                {{ log.user_email or "" }}
+                            </small>
+
+                        </td>
+
+                        <td>
+
+                            <span class="role">
+                                {{ log.user_role or "N/A" }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="action">
+                                {{ log.action }}
+                            </span>
+
+                        </td>
+
+                        <td class="details">
+                            {{ log.details or "-" }}
+                        </td>
+
+                        <td>
+                            {{ log.created_at }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>No Audit Logs Found</h3>
+
+                <p>
+                    No activities have been recorded yet.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </main>
+
+</body>
+</html>

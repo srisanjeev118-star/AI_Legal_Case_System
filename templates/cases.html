@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cases | AI Legal Case Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+
+        /* ==============================
+           SIDEBAR
+        ============================== */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 240px;
+            height: 100vh;
+
+            background: #0f172a;
+
+            padding: 25px 15px;
+
+            color: white;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: bold;
+
+            padding: 10px;
+
+            margin-bottom: 30px;
+        }
+
+        .menu a {
+            display: block;
+
+            text-decoration: none;
+
+            color: #cbd5e1;
+
+            padding: 13px;
+
+            margin-bottom: 8px;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #1e293b;
+            color: white;
+        }
+
+
+        /* ==============================
+           MAIN
+        ============================== */
+
+        .main {
+            margin-left: 240px;
+
+            padding: 30px;
+        }
+
+
+        /* ==============================
+           TOP BAR
+        ============================== */
+
+        .topbar {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        .subtitle {
+            color: #64748b;
+
+            margin-top: 6px;
+        }
+
+        .top-buttons {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .back {
+            text-decoration: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+        }
+
+        .back:hover {
+            background: #1d4ed8;
+        }
+
+        .add-btn {
+            text-decoration: none;
+
+            background: #16a34a;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #15803d;
+        }
+
+
+        /* ==============================
+           TABLE BOX
+        ============================== */
+
+        .box {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+
+            overflow-x: auto;
+        }
+
+        .box h2 {
+            margin-bottom: 10px;
+        }
+
+        .count {
+            color: #64748b;
+
+            margin-top: 5px;
+        }
+
+
+        /* ==============================
+           TABLE
+        ============================== */
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 20px;
+
+            min-width: 1250px;
+        }
+
+        th,
+        td {
+            padding: 14px;
+
+            text-align: left;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f8fafc;
+
+            color: #475569;
+
+            font-size: 14px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .case-id {
+            font-weight: bold;
+
+            color: #2563eb;
+        }
+
+        .case-number {
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           STATUS
+        ============================== */
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 12px;
+
+            border-radius: 20px;
+
+            background: #fef3c7;
+
+            color: #92400e;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           ACTION BUTTONS
+        ============================== */
+
+        .actions {
+            display: flex;
+
+            gap: 8px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* VIEW BUTTON */
+
+        .view-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 7px 12px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        .view-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* EDIT BUTTON */
+
+        .edit-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #f59e0b;
+
+            color: white;
+
+            padding: 7px 12px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+        .edit-btn:hover {
+            background: #d97706;
+        }
+
+
+        /* DELETE BUTTON */
+
+        .delete-btn {
+            background: #dc2626;
+
+            color: white;
+
+            border: none;
+
+            padding: 7px 12px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+
+        /* ==============================
+           EMPTY
+        ============================== */
+
+        .empty {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #64748b;
+        }
+
+        .empty h3 {
+            color: #334155;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* ==============================
+           ERROR
+        ============================== */
+
+        .error {
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 15px;
+        }
+
+
+        /* ==============================
+           FILTER BOX
+        ============================== */
+
+        .filter-box {
+            background: #f8fafc;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            margin-top: 20px;
+
+            border: 1px solid #e2e8f0;
+        }
+
+        .filter-form {
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr 1fr 1fr auto auto;
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+        .filter-form input,
+        .filter-form select {
+            width: 100%;
+
+            padding: 11px 12px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            background: white;
+
+            font-size: 14px;
+
+            outline: none;
+        }
+
+        .filter-form input:focus,
+        .filter-form select:focus {
+            border-color: #2563eb;
+        }
+
+        .filter-btn {
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .clear-btn {
+            text-decoration: none;
+
+            background: #64748b;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .clear-btn:hover {
+            background: #475569;
+        }
+
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media(max-width: 1000px) {
+
+            .filter-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+
+                padding: 20px;
+            }
+
+            .topbar {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+            .top-buttons {
+                flex-wrap: wrap;
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+
+                width: 100%;
+
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+
+                padding: 15px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+        }
+        /* =========================================================
+   CASES PAGE - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Sidebar */
+.sidebar {
+    background: linear-gradient(180deg, #0f172a 0%, #172554 100%);
+    width: 250px;
+    box-shadow: 6px 0 25px rgba(15,23,42,0.12);
+}
+
+.brand {
+    padding: 14px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.06);
+}
+
+.menu a {
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.menu a:hover {
+    background: rgba(255,255,255,0.09);
+    transform: translateX(4px);
+}
+
+.menu a.active {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+    box-shadow: 0 6px 18px rgba(37,99,235,0.25);
+}
+
+/* Main */
+.main {
+    margin-left: 250px;
+    padding: 32px;
+}
+
+/* Topbar */
+.topbar {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(10px);
+    padding: 22px 25px;
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 25px rgba(15,23,42,0.06);
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+/* Top buttons */
+.back,
+.add-btn {
+    border-radius: 10px;
+    padding: 11px 17px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 14px rgba(15,23,42,0.10);
+}
+
+.back:hover,
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(15,23,42,0.15);
+}
+
+.add-btn {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+}
+
+.back {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+/* Main box */
+.box {
+    border-radius: 18px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+    padding: 26px;
+}
+
+/* Filter */
+.filter-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.04);
+}
+
+.filter-form input,
+.filter-form select {
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    transition: all 0.2s ease;
+}
+
+.filter-form input:focus,
+.filter-form select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
+}
+
+.filter-btn,
+.clear-btn {
+    border-radius: 9px;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover,
+.clear-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Table */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #475569;
+}
+
+td {
+    background: #ffffff;
+}
+
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover td {
+    background: #f8fbff;
+}
+
+/* Case ID / Number */
+.case-id {
+    font-weight: 800;
+    color: #2563eb;
+}
+
+.case-number {
+    font-weight: 700;
+}
+
+/* Status */
+.status {
+    border: 1px solid #fde68a;
+    box-shadow: 0 2px 6px rgba(146,64,14,0.06);
+}
+
+/* Action buttons */
+.actions {
+    gap: 7px;
+}
+
+.view-btn,
+.edit-btn,
+.delete-btn {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 8px rgba(15,23,42,0.08);
+}
+
+.view-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.edit-btn {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+}
+
+.view-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 13px rgba(15,23,42,0.14);
+}
+
+/* Empty state */
+.empty {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+/* Responsive */
+@media(max-width: 800px) {
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        margin-left: 190px;
+        padding: 20px;
+    }
+
+    .topbar {
+        border-radius: 14px;
+    }
+}
+
+@media(max-width: 600px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .topbar {
+        padding: 18px;
+    }
+
+    .box {
+        padding: 18px;
+        border-radius: 14px;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            ⚖️ Legal Case System
+
+        </div>
+
+
+        <div class="menu">
+
+            <a href="{{ url_for('dashboard') }}">
+
+                🏠 Dashboard
+
+            </a>
+
+
+            <a href="{{ url_for('cases') }}"
+               class="active">
+
+                📁 Cases
+
+            </a>
+
+
+            <a href="{{ url_for('documents') }}">
+
+                📄 Documents
+
+            </a>
+
+
+            <a href="{{ url_for('users') }}">
+
+                👥 Users
+
+            </a>
+
+
+            {% if session.get("user_role") == "Admin" %}
+
+<a href="/database">
+    🗄️ Database
+</a>
+
+<a href="/db-test">
+    🔌 Database Test
+</a>
+
+{% endif %}
+
+
+            <a href="{{ url_for('logout') }}">
+
+                🚪 Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="topbar">
+
+
+            <div>
+
+                <h1>
+
+                    Legal Cases
+
+                </h1>
+
+
+                <p class="subtitle">
+
+                    AI Legal Case Management System
+
+                </p>
+
+            </div>
+
+
+
+            <div class="top-buttons">
+
+
+                <!-- ADD CASE -->
+
+                <a href="{{ url_for('add_case') }}"
+                   class="add-btn">
+
+                    ➕ Add New Case
+
+                </a>
+
+
+                <!-- DASHBOARD -->
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="back">
+
+                    ← Dashboard
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             CASE TABLE
+        ========================================= -->
+
+        <div class="box">
+
+
+            <h2>
+
+                All Cases
+
+            </h2>
+
+
+
+            <!-- FILTER -->
+
+            <div class="filter-box">
+
+
+                <form method="GET"
+                      action="{{ url_for('cases') }}"
+                      class="filter-form">
+
+
+                    <!-- SEARCH -->
+
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="🔍 Search case number or title..."
+                        value="{{ search or '' }}"
+                    >
+
+
+
+                    <!-- CASE TYPE -->
+
+                    <select name="case_type">
+
+                        <option value="">
+
+                            All Case Types
+
+                        </option>
+
+
+                        {% for type in case_types %}
+
+                            <option value="{{ type }}"
+                                {% if case_type == type %}
+                                    selected
+                                {% endif %}>
+
+                                {{ type }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+
+                    <!-- STATUS -->
+
+                    <select name="status">
+
+                        <option value="">
+
+                            All Status
+
+                        </option>
+
+
+                        {% for status in statuses %}
+
+                            <option value="{{ status }}"
+                                {% if selected_status == status %}
+                                    selected
+                                {% endif %}>
+
+                                {{ status }}
+
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+
+
+                    <!-- SORT -->
+
+                    <select name="sort">
+
+                        <option value="newest"
+                            {% if sort == "newest" %}
+                                selected
+                            {% endif %}>
+
+                            📅 Newest First
+
+                        </option>
+
+
+                        <option value="oldest"
+                            {% if sort == "oldest" %}
+                                selected
+                            {% endif %}>
+
+                            📅 Oldest First
+
+                        </option>
+
+                    </select>
+
+
+
+                    <!-- SEARCH BUTTON -->
+
+                    <button type="submit"
+                            class="filter-btn">
+
+                        🔍 Search
+
+                    </button>
+
+
+
+                    <!-- CLEAR -->
+
+                    <a href="{{ url_for('cases') }}"
+                       class="clear-btn">
+
+                        ✕ Clear
+
+                    </a>
+
+
+                </form>
+
+            </div>
+
+
+
+            {% if cases %}
+
+
+                <!-- TOTAL CASES -->
+
+                <p class="count">
+
+                    Total Cases: {{ cases|length }}
+
+                </p>
+
+
+
+                <!-- CASE TABLE -->
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Case ID
+
+                            </th>
+
+
+                            <th>
+
+                                Case Number
+
+                            </th>
+
+
+                            <th>
+
+                                Title
+
+                            </th>
+
+
+                            <th>
+
+                                Type
+
+                            </th>
+
+
+                            <th>
+
+                                Client
+
+                            </th>
+
+
+                            <th>
+
+                                Lawyer
+
+                            </th>
+
+
+                            <th>
+
+                                Status
+
+                            </th>
+
+
+                            <th>
+
+                                Filing Date
+
+                            </th>
+
+
+                            <th>
+
+                                Actions
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        {% for case in cases %}
+
+
+                            <tr>
+
+
+                                <!-- CASE ID -->
+
+                                <td class="case-id">
+
+                                    {{ case.case_id }}
+
+                                </td>
+
+
+
+                                <!-- CASE NUMBER -->
+
+                                <td class="case-number">
+
+                                    {{ case.case_number }}
+
+                                </td>
+
+
+
+                                <!-- TITLE -->
+
+                                <td>
+
+                                    {{ case.title }}
+
+                                </td>
+
+
+
+                                <!-- TYPE -->
+
+                                <td>
+
+                                    {{ case.case_type or "N/A" }}
+
+                                </td>
+
+
+
+                                <!-- CLIENT -->
+
+                                <td>
+
+                                    {{ case.client_name or "N/A" }}
+
+                                </td>
+
+
+
+                                <!-- LAWYER -->
+
+                                <td>
+
+                                    {{ case.lawyer_name or "N/A" }}
+
+                                </td>
+
+
+
+                                <!-- STATUS -->
+
+                                <td>
+
+                                    <span class="status">
+
+                                        {{ case.status or "Pending" }}
+
+                                    </span>
+
+                                </td>
+
+
+
+                                <!-- FILING DATE -->
+
+                                <td>
+
+                                    {{ case.filing_date or "N/A" }}
+
+                                </td>
+
+
+
+                                <!-- ACTIONS -->
+
+                                <td>
+
+
+                                    <div class="actions">
+
+
+                                        <!-- VIEW -->
+
+                                        <a href="{{ url_for('case_details', case_id=case.case_id) }}"
+                                           class="view-btn">
+
+                                            👁️ View
+
+                                        </a>
+
+
+
+                                        <!-- EDIT -->
+
+                                        <a href="{{ url_for('edit_case', case_id=case.case_id) }}"
+                                           class="edit-btn">
+
+                                            ✏️ Edit
+
+                                        </a>
+
+
+
+                                        <!-- DELETE -->
+
+                                        <form method="POST"
+                                              action="{{ url_for('delete_case', case_id=case.case_id) }}"
+                                              onsubmit="return confirm('Are you sure you want to delete this case?');">
+
+
+                                            <button type="submit"
+                                                    class="delete-btn">
+
+                                                🗑️ Delete
+
+                                            </button>
+
+
+                                        </form>
+
+
+                                    </div>
+
+
+                                </td>
+
+
+                            </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            {% else %}
+
+
+                <!-- NO CASES -->
+
+                <div class="empty">
+
+
+                    <h3>
+
+                        📁 No Cases Found
+
+                    </h3>
+
+
+                    <p>
+
+                        There are currently no cases in the database.
+
+                    </p>
+
+
+                    <br>
+
+
+                    <a href="{{ url_for('add_case') }}"
+                       class="add-btn">
+
+                        ➕ Add First Case
+
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>

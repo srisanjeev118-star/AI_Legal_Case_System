@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Hearing | Legal Case Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 18px 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .brand span {
+            color: #60a5fa;
+        }
+
+        .header-link {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .header-link:hover {
+            color: white;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* ================= PAGE TITLE ================= */
+
+        .page-heading {
+            margin-bottom: 22px;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .page-heading p {
+            color: #64748b;
+            font-size: 15px;
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+
+            box-shadow:
+                0 8px 25px rgba(15,23,42,0.08);
+
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #dbeafe;
+            border-radius: 12px;
+
+            font-size: 22px;
+        }
+
+        .card-header h2 {
+            font-size: 20px;
+        }
+
+        .card-header p {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 4px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            color: #334155;
+
+            margin-bottom: 7px;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        select,
+        textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #0f172a;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.12);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .help-text {
+            margin-top: 5px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 12px;
+
+            margin-top: 30px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            border: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .save-btn {
+
+            background: #2563eb;
+
+            color: white;
+
+            box-shadow:
+                0 4px 10px rgba(37,99,235,0.20);
+        }
+
+        .save-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .back-btn {
+
+            background: #e2e8f0;
+
+            color: #334155;
+        }
+
+        .back-btn:hover {
+            background: #cbd5e1;
+        }
+        /* =========================================================
+   ADD HEARING PAGE - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.15);
+}
+
+.brand {
+    font-weight: 800;
+}
+
+.header-link {
+    padding: 9px 13px;
+    border-radius: 9px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.10);
+    transition: all 0.25s ease;
+}
+
+.header-link:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+}
+
+/* Main */
+.container {
+    max-width: 1000px;
+}
+
+/* Page heading */
+.page-heading h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.page-heading p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Main card */
+.card {
+    border-radius: 20px;
+    padding: 34px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 14px 35px rgba(15,23,42,0.07);
+}
+
+/* Card header */
+.card-header {
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+}
+
+.icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #dbeafe, #eff6ff);
+    box-shadow: 0 5px 12px rgba(37,99,235,0.10);
+}
+
+.card-header h2 {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.card-header p {
+    color: #64748b;
+}
+
+/* Form */
+.form-grid {
+    gap: 22px;
+}
+
+label {
+    font-weight: 700;
+    color: #334155;
+}
+
+.required {
+    color: #dc2626;
+    font-weight: 800;
+}
+
+input,
+select,
+textarea {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #94a3b8;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
+    transform: translateY(-1px);
+}
+
+select {
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 145px;
+    line-height: 1.6;
+}
+
+.help-text {
+    color: #94a3b8;
+}
+
+/* Buttons area */
+.buttons {
+    margin-top: 32px;
+    padding-top: 24px;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+/* Back */
+.back-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.back-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(15,23,42,0.08);
+}
+
+/* Save */
+.save-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    box-shadow: 0 6px 16px rgba(37,99,235,0.20);
+}
+
+.save-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(37,99,235,0.28);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .container {
+        margin: 25px auto;
+    }
+
+    .card {
+        padding: 22px;
+        border-radius: 15px;
+    }
+
+    .page-heading h1 {
+        font-size: 26px;
+    }
+
+    .card-header h2 {
+        font-size: 19px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 16px 18px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 0 12px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <div class="brand">
+            ⚖️ Legal <span>Case Management System</span>
+        </div>
+
+        <a href="{{ url_for('hearings') }}"
+           class="header-link">
+
+            ← Hearings
+
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+        <h1>
+            Add New Hearing
+        </h1>
+
+        <p>
+            Schedule and record a new court hearing for a case.
+        </p>
+
+    </div>
+
+
+    <!-- ================= CARD ================= -->
+
+    <div class="card">
+
+
+        <div class="card-header">
+
+            <div class="icon">
+                📅
+            </div>
+
+            <div>
+
+                <h2>
+                    Hearing Information
+                </h2>
+
+                <p>
+                    Enter the hearing details below.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form method="POST"
+              action="{{ url_for('add_hearing') }}">
+
+
+            <div class="form-grid">
+
+
+                <!-- CASE -->
+
+                <div class="form-group full-width">
+
+                    <label for="case_id">
+
+                        Select Case
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <select id="case_id"
+                            name="case_id"
+                            required>
+
+                        <option value="">
+                            -- Select Case --
+                        </option>
+
+                        {% for case in cases %}
+
+                        <option value="{{ case.case_id }}">
+
+                            {{ case.case_number }}
+                            -
+                            {{ case.title }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    <div class="help-text">
+                        Select the case for which this hearing is scheduled.
+                    </div>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="hearing_date">
+
+                        Hearing Date
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input type="date"
+                           id="hearing_date"
+                           name="hearing_date"
+                           required>
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="form-group">
+
+                    <label for="hearing_time">
+
+                        Hearing Time
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input type="time"
+                           id="hearing_time"
+                           name="hearing_time"
+                           required>
+
+                </div>
+
+
+                <!-- COURT -->
+
+                <div class="form-group">
+
+                    <label for="court_name">
+
+                        Court Name
+                        <span class="required">*</span>
+
+                    </label>
+
+                    <input type="text"
+                           id="court_name"
+                           name="court_name"
+                           placeholder="Enter court name"
+                           required>
+
+                </div>
+
+
+                <!-- JUDGE -->
+
+                <div class="form-group">
+
+                    <label for="judge_name">
+
+                        Judge Name
+
+                    </label>
+
+                    <input type="text"
+                           id="judge_name"
+                           name="judge_name"
+                           placeholder="Enter judge name">
+
+                </div>
+
+
+                <!-- NOTES -->
+
+                <div class="form-group full-width">
+
+                    <label for="notes">
+
+                        Hearing Notes
+
+                    </label>
+
+                    <textarea id="notes"
+                              name="notes"
+                              placeholder="Enter important hearing notes, instructions or remarks..."></textarea>
+
+                    <div class="help-text">
+                        Add any additional information related to this hearing.
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= BUTTONS ================= -->
+
+            <div class="buttons">
+
+                <a href="{{ url_for('hearings') }}"
+                   class="btn back-btn">
+
+                    ← Back to Hearings
+
+                </a>
+
+
+                <button type="submit"
+                        class="btn save-btn">
+
+                    💾 Save Hearing
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | AI Legal Case System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+        }
+
+        .dashboard-btn {
+            background: #334155;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .dashboard-btn:hover {
+            background: #475569;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+        .table-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 750px;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #475569;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .id {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .name {
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .email {
+            color: #475569;
+        }
+
+        .role {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .empty h2 {
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        @media(max-width: 700px) {
+
+            .header {
+                padding: 18px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 0 12px;
+            }
+
+            .title {
+                font-size: 25px;
+            }
+
+            .table-card {
+                padding: 12px;
+            }
+        }
+        /* =========================================================
+   USERS PAGE - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 22px 30px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.16);
+}
+
+.header-content {
+    max-width: 1250px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.dashboard-btn {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    padding: 11px 16px;
+    transition: all .25s ease;
+}
+
+.dashboard-btn:hover {
+    background: rgba(255,255,255,.16);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0,0,0,.15);
+}
+
+/* Main container */
+.container {
+    max-width: 1250px;
+    margin-top: 35px;
+}
+
+/* Page heading */
+.top-section {
+    margin-bottom: 28px;
+}
+
+.title {
+    font-size: 31px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Table card */
+.table-card {
+    background: rgba(255,255,255,.97);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 32px rgba(15,23,42,.07);
+    transition: all .25s ease;
+}
+
+.table-card:hover {
+    box-shadow: 0 16px 38px rgba(15,23,42,.09);
+}
+
+/* Table */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+th {
+    background: linear-gradient(135deg,#f8fafc,#eef2ff);
+    color: #334155;
+    padding: 15px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-bottom: 1px solid #dbeafe;
+}
+
+td {
+    padding: 15px;
+    color: #475569;
+    border-bottom: 1px solid #e2e8f0;
+    line-height: 1.5;
+}
+
+tbody tr {
+    transition: all .2s ease;
+}
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ID */
+.id {
+    display: inline-block;
+    min-width: 30px;
+    padding: 4px 7px;
+    text-align: center;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-weight: 800;
+}
+
+/* Name */
+.name {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+/* Email */
+.email {
+    color: #64748b;
+}
+
+/* Role */
+.role {
+    background: linear-gradient(135deg,#eff6ff,#dbeafe);
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    box-shadow: 0 3px 8px rgba(37,99,235,.06);
+}
+
+/* Created date */
+tbody td:last-child {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Empty state */
+.empty {
+    padding: 65px 20px;
+    background: linear-gradient(135deg,#f8fafc,#ffffff);
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+}
+
+.empty-icon {
+    font-size: 50px;
+    opacity: .9;
+}
+
+.empty h2 {
+    color: #334155;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.empty p {
+    color: #64748b;
+}
+
+/* Horizontal scrollbar */
+.table-card::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-card::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.table-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.table-card::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+
+    .container {
+        padding: 0 18px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .table-card {
+        border-radius: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .header {
+        padding: 18px 15px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 0 12px;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    .table-card {
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    table {
+        min-width: 800px;
+    }
+
+    th,
+    td {
+        padding: 13px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-content">
+
+        <h1>⚖️ Legal Case Management System</h1>
+
+        <a href="{{ url_for('dashboard') }}"
+           class="dashboard-btn">
+            🏠 Dashboard
+        </a>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <div class="top-section">
+
+        <div>
+            <div class="title">
+                👥 Users
+            </div>
+
+            <div class="subtitle">
+                Manage registered system users
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="table-card">
+
+        {% if users %}
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for user in users %}
+
+                <tr>
+
+                    <td>
+                        <span class="id">
+                            {{ user.id }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="name">
+                            {{ user.name }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="email">
+                            {{ user.email }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="role">
+                            {{ user.role }}
+                        </span>
+                    </td>
+
+                    <td>
+                        {{ user.created_at or "N/A" }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                👥
+            </div>
+
+            <h2>No Users Found</h2>
+
+            <p>
+                There are currently no registered users.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</main>
+
+</body>
+</html>

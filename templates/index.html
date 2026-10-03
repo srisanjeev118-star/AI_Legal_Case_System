@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | AI Legal Case Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 400px;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #111827;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin: 8px 0 30px;
+            font-size: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #374151;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .register a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* =========================================================
+   LOGIN PAGE - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background:
+        radial-gradient(circle at 10% 10%, rgba(59,130,246,.22), transparent 35%),
+        radial-gradient(circle at 90% 90%, rgba(99,102,241,.20), transparent 35%),
+        linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+}
+
+/* Login card */
+.login-container {
+    width: 100%;
+    max-width: 430px;
+    padding: 42px 38px;
+
+    background: rgba(255,255,255,.98);
+
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,.5);
+
+    box-shadow: 0 25px 65px rgba(0,0,0,.28);
+
+    transition: all .25s ease;
+}
+
+.login-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 30px 75px rgba(0,0,0,.32);
+}
+
+/* Logo */
+.logo {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 21px;
+
+    background: linear-gradient(135deg, #2563eb, #4f46e5);
+
+    border: 1px solid #bfdbfe;
+    border-radius: 19px;
+
+    font-size: 32px;
+
+    box-shadow: 0 10px 24px rgba(37,99,235,.25);
+
+    transition: all .25s ease;
+}
+
+.logo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(37,99,235,.30);
+}
+
+/* Heading */
+h1 {
+    font-size: 29px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -.4px;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 9px 0 28px;
+}
+
+/* Labels */
+label {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 13px 14px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #0f172a;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+
+    transition: all .2s ease;
+}
+
+input:hover {
+    border-color: #94a3b8;
+}
+
+input:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
+
+    transform: translateY(-1px);
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+/* Login button */
+button {
+    width: 100%;
+    padding: 14px;
+
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+
+    border: none;
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 18px rgba(37,99,235,.20);
+
+    transition: all .25s ease;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 11px 23px rgba(37,99,235,.28);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Register section */
+.register {
+    margin-top: 24px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e2e8f0;
+
+    color: #64748b;
+    font-size: 14px;
+}
+
+.register a {
+    color: #2563eb;
+    font-weight: 700;
+
+    transition: color .2s ease;
+}
+
+.register a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .login-container {
+        padding: 32px 22px;
+        border-radius: 17px;
+    }
+
+    .logo {
+        width: 62px;
+        height: 62px;
+        font-size: 29px;
+        border-radius: 16px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    input,
+    button {
+        padding: 12px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="logo">⚖</div>
+
+    <h1>Welcome Back</h1>
+
+    <p class="subtitle">
+        AI Legal Case Management System
+    </p>
+
+    <form method="POST">
+
+        <label>Email Address</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button type="submit">
+            Login
+        </button>
+
+    </form>
+
+    <div class="register">
+        Don't have an account?
+        <a href="/register">Create Account</a>
+    </div>
+
+</div>
+
+</body>
+</html>

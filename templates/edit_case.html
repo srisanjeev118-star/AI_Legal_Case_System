@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Case | Legal Case Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 22px;
+        }
+
+        .dashboard-btn {
+            background: #334155;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .dashboard-btn:hover {
+            background: #475569;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        /* ================= PAGE HEADER ================= */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h2 {
+            font-size: 30px;
+            color: #0f172a;
+        }
+
+        .page-header p {
+            margin-top: 7px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* ================= FORM GRID ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            background: #fff;
+            color: #0f172a;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        /* ================= ACTIONS ================= */
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 20px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .update-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .cancel-btn {
+            background: #f1f5f9;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+
+        .cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* ================= ERROR ================= */
+
+        .error-box {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 12px 15px;
+            border-radius: 9px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 18px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 0 12px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>
+                ⚖️ Legal Case Management System
+            </h1>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="dashboard-btn">
+                🏠 Dashboard
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <h2>
+                ✏️ Edit Case
+            </h2>
+
+            <p>
+                Update and manage the selected case information.
+            </p>
+
+        </div>
+
+
+        <div class="form-card">
+
+            {% if error %}
+
+            <div class="error-box">
+                ⚠️ {{ error }}
+            </div>
+
+            {% endif %}
+
+
+            <div class="section-title">
+                📋 Case Information
+            </div>
+
+
+            <form method="POST">
+
+                <div class="form-grid">
+
+
+                    <!-- CASE NUMBER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Case Number
+                        </label>
+
+                        <input
+                            type="text"
+                            name="case_number"
+                            value="{{ case.case_number }}"
+                            placeholder="Enter case number"
+                            required>
+
+                    </div>
+
+
+                    <!-- CASE TITLE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Case Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            value="{{ case.title }}"
+                            placeholder="Enter case title"
+                            required>
+
+                    </div>
+
+
+                    <!-- CASE TYPE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Case Type
+                        </label>
+
+                        <select name="case_type">
+
+                            <option value="Civil"
+                                {% if case.case_type == 'Civil' %}selected{% endif %}>
+                                Civil
+                            </option>
+
+                            <option value="Criminal"
+                                {% if case.case_type == 'Criminal' %}selected{% endif %}>
+                                Criminal
+                            </option>
+
+                            <option value="Property"
+                                {% if case.case_type == 'Property' %}selected{% endif %}>
+                                Property
+                            </option>
+
+                            <option value="Family"
+                                {% if case.case_type == 'Family' %}selected{% endif %}>
+                                Family
+                            </option>
+
+                            <option value="Business"
+                                {% if case.case_type == 'Business' %}selected{% endif %}>
+                                Business
+                            </option>
+
+                            <option value="Other"
+                                {% if case.case_type == 'Other' %}selected{% endif %}>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Case Status
+                        </label>
+
+                        <select name="status">
+
+                            <option value="Pending"
+                                {% if case.status == 'Pending' %}selected{% endif %}>
+                                Pending
+                            </option>
+
+                            <option value="Ongoing"
+                                {% if case.status == 'Ongoing' %}selected{% endif %}>
+                                Ongoing
+                            </option>
+
+                            <option value="Closed"
+                                {% if case.status == 'Closed' %}selected{% endif %}>
+                                Closed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CLIENT -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Client
+                        </label>
+
+                        <select name="client_id" required>
+
+                            {% for client in clients %}
+
+                            <option value="{{ client.client_id }}"
+                                {% if case.client_id == client.client_id %}selected{% endif %}>
+
+                                {{ client.name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- LAWYER -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Assigned Lawyer
+                        </label>
+
+                        <select name="lawyer_id" required>
+
+                            {% for lawyer in lawyers %}
+
+                            <option value="{{ lawyer.lawyer_id }}"
+                                {% if case.lawyer_id == lawyer.lawyer_id %}selected{% endif %}>
+
+                                {{ lawyer.name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- FILING DATE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Filing Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="filing_date"
+                            value="{{ case.filing_date }}">
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Case Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            placeholder="Enter detailed case description...">{{ case.description or '' }}</textarea>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ACTION BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a href="{{ url_for('cases') }}"
+                       class="btn cancel-btn">
+
+                        ← Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="btn update-btn">
+
+                        💾 Update Case
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

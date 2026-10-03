@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Notes Summary | AI Legal Case System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header-content {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 23px;
+        }
+
+        .dashboard-btn {
+            background: #334155;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .dashboard-btn:hover {
+            background: #475569;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .top-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .case-info {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 22px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .label {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .summary-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 22px;
+            white-space: pre-wrap;
+            line-height: 1.7;
+            font-size: 14px;
+            color: #334155;
+            overflow-x: auto;
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 10px;
+            color: #9a3412;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn {
+            background: #475569;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background: #334155;
+        }
+
+        .print-btn {
+            background: #059669;
+            color: white;
+        }
+
+        .print-btn:hover {
+            background: #047857;
+        }
+
+        @media (max-width: 800px) {
+
+            .case-info {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .case-info {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+        @media print {
+
+            .header,
+            .actions {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+            }
+
+            .top-card,
+            .summary-card {
+                box-shadow: none;
+            }
+
+        }
+        /* =========================================================
+   AI NOTES SUMMARY - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 22px 35px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.16);
+}
+
+.header-content {
+    max-width: 1250px;
+}
+
+.header h1 {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.dashboard-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 11px 16px;
+    transition: all 0.25s ease;
+}
+
+.dashboard-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Main container */
+.container {
+    max-width: 1250px;
+    margin-top: 35px;
+}
+
+/* Case information card */
+.top-card {
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
+    transition: all 0.25s ease;
+}
+
+.top-card:hover {
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.09);
+}
+
+.title {
+    font-size: 31px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 9px;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Case information boxes */
+.case-info {
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.info-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 17px;
+    transition: all 0.2s ease;
+}
+
+.info-box:hover {
+    background: #f8fbff;
+    border-color: #bfdbfe;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.05);
+}
+
+.label {
+    color: #64748b;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.value {
+    color: #1e293b;
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+/* AI Summary card */
+.summary-card {
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 12px 32px rgba(15, 23, 42, 0.07);
+    transition: all 0.25s ease;
+}
+
+.summary-card:hover {
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.09);
+}
+
+.card-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0f172a;
+    padding-bottom: 17px;
+    margin-bottom: 17px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* AI badge */
+.ai-badge {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    box-shadow: 0 4px 10px rgba(4, 120, 87, 0.07);
+    padding: 7px 13px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+}
+
+/* Summary content */
+.summary-box {
+    margin-top: 4px;
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #dbeafe;
+    border-left: 5px solid #2563eb;
+    border-radius: 13px;
+    padding: 25px;
+    line-height: 1.85;
+    font-size: 14px;
+    color: #334155;
+    box-shadow: inset 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+/* Disclaimer */
+.disclaimer {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    color: #92400e;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(146, 64, 14, 0.05);
+}
+
+/* Action buttons */
+.actions {
+    margin-top: 26px;
+    gap: 11px;
+}
+
+.btn {
+    border-radius: 9px;
+    padding: 11px 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+    transition: all 0.25s ease;
+}
+
+.back-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.print-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.back-btn:hover,
+.print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(15, 23, 42, 0.14);
+}
+
+.back-btn:hover {
+    background: #e2e8f0;
+}
+
+.print-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+
+    .header {
+        padding: 18px;
+    }
+
+    .container {
+        padding: 0 15px;
+        margin-top: 25px;
+    }
+
+    .title {
+        font-size: 27px;
+    }
+
+    .top-card,
+    .summary-card {
+        padding: 22px;
+        border-radius: 15px;
+    }
+
+    .case-info {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container {
+        padding: 0 12px;
+    }
+
+    .case-info {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .summary-box {
+        padding: 18px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+/* Print */
+@media print {
+
+    .header,
+    .actions,
+    .dashboard-btn {
+        display: none !important;
+    }
+
+    body {
+        background: #fff;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .top-card,
+    .summary-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .summary-box {
+        border-left: 3px solid #333;
+    }
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>⚖️ AI Legal Case Management</h1>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="dashboard-btn">
+                🏠 Dashboard
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+        <!-- CASE INFORMATION -->
+
+        <div class="top-card">
+
+            <div class="title">
+                📝 AI Case Notes Summary
+            </div>
+
+            <div class="subtitle">
+                Review and summarize the notes recorded for this case.
+            </div>
+
+
+            <div class="case-info">
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Case Number
+                    </div>
+
+                    <div class="value">
+                        {{ case.case_number or "N/A" }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Case Title
+                    </div>
+
+                    <div class="value">
+                        {{ case.title or "N/A" }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Case Type
+                    </div>
+
+                    <div class="value">
+                        {{ case.case_type or "N/A" }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="label">
+                        Status
+                    </div>
+
+                    <div class="value">
+                        {{ case.status or "N/A" }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI SUMMARY -->
+
+        <div class="summary-card">
+
+            <div class="card-title">
+                🤖 AI Generated Notes Summary
+            </div>
+
+            <span class="ai-badge">
+                LOCAL AI • NO API REQUIRED
+            </span>
+
+
+            <div class="summary-box">{{ summary }}</div>
+
+
+            <div class="disclaimer">
+
+                ⚠️ <strong>Important:</strong>
+                This summary is generated from the case notes stored
+                in the system for general case-management and
+                informational purposes. It is not legal advice.
+                Missing information is not assumed or invented.
+
+            </div>
+
+
+            <div class="actions">
+
+                <a href="{{ url_for('case_details', case_id=case.case_id) }}"
+                   class="btn back-btn">
+                    ← Back to Case
+                </a>
+
+                <button onclick="window.print()"
+                        class="btn print-btn">
+                    🖨️ Print Summary
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

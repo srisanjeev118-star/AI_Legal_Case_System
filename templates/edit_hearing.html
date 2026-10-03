@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Hearing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #ffffff;
+            color: #2563eb;
+            border: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: #0f172a;
+        }
+
+        /* FORM GRID */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #1e293b;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        /* HEARING INFO */
+        .hearing-info {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 22px;
+        }
+
+        .hearing-info-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .case-id {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* ACTION BUTTONS */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+        }
+
+        .cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .update-btn {
+            padding: 11px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .update-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+
+            .page {
+                padding: 20px 12px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .update-btn,
+            .cancel-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <div>
+                <h1>✏️ Edit Hearing</h1>
+                <p>Update the hearing information</p>
+            </div>
+
+            <a href="{{ url_for('hearings') }}" class="back-btn">
+                ← Back to Hearings
+            </a>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+        <div class="form-card">
+
+            <div class="section-title">
+                Hearing Information
+            </div>
+
+
+            <!-- CASE INFORMATION -->
+            <div class="hearing-info">
+
+                <div class="hearing-info-title">
+                    CASE ID
+                </div>
+
+                <div class="case-id">
+                    Case #{{ hearing.case_id }}
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+            <form method="POST">
+
+                <div class="form-grid">
+
+                    <!-- HEARING DATE -->
+                    <div class="form-group">
+
+                        <label>
+                            Hearing Date
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            name="hearing_date"
+                            value="{{ hearing.hearing_date }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- HEARING TIME -->
+                    <div class="form-group">
+
+                        <label>
+                            Hearing Time
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="time"
+                            name="hearing_time"
+                            value="{{ hearing.hearing_time }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- COURT NAME -->
+                    <div class="form-group">
+
+                        <label>
+                            Court Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="court_name"
+                            value="{{ hearing.court_name }}"
+                            placeholder="Enter court name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- JUDGE NAME -->
+                    <div class="form-group">
+
+                        <label>
+                            Judge Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="judge_name"
+                            value="{{ hearing.judge_name or '' }}"
+                            placeholder="Enter judge name"
+                        >
+
+                    </div>
+
+
+                    <!-- NOTES -->
+                    <div class="form-group full-width">
+
+                        <label>
+                            Hearing Notes
+                        </label>
+
+                        <textarea
+                            name="notes"
+                            placeholder="Enter hearing notes"
+                        >{{ hearing.notes or '' }}</textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTION BUTTONS -->
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('hearings') }}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                    >
+                        💾 Update Hearing
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

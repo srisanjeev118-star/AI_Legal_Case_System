@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Dashboard Insights</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* ==========================================
+           HEADER
+        ========================================== */
+
+        .header {
+            background: linear-gradient(
+                135deg,
+                #172554,
+                #2563eb
+            );
+
+            color: white;
+
+            padding: 22px 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .dashboard-btn {
+            text-decoration: none;
+            color: white;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.3);
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            transition: 0.2s;
+        }
+
+        .dashboard-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+            max-width: 1200px;
+
+            margin: 30px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* ==========================================
+           PAGE TITLE
+        ========================================== */
+
+        .page-title {
+            margin-bottom: 22px;
+        }
+
+        .page-title h2 {
+            font-size: 27px;
+
+            color: #111827;
+
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ==========================================
+           AI BADGE
+        ========================================== */
+
+        .ai-badge {
+            display: inline-block;
+
+            background: #ecfdf5;
+
+            color: #047857;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* ==========================================
+           STATISTICS
+        ========================================== */
+
+        .stats-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.05);
+
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 7px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-icon {
+            font-size: 24px;
+
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #111827;
+        }
+
+
+        /* ==========================================
+           INSIGHT CARD
+        ========================================== */
+
+        .insight-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-left: 5px solid #2563eb;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .card-header h3 {
+            font-size: 19px;
+
+            color: #111827;
+        }
+
+        .local-ai {
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            padding: 6px 10px;
+
+            border-radius: 15px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            white-space: nowrap;
+        }
+
+
+        /* ==========================================
+           SUMMARY
+        ========================================== */
+
+        .summary {
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            white-space: pre-wrap;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            color: #374151;
+
+            overflow-x: auto;
+
+            min-height: 180px;
+        }
+
+
+        /* ==========================================
+           DATA QUALITY
+        ========================================== */
+
+        .quality-card {
+            background: white;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        .quality-header {
+            margin-bottom: 18px;
+        }
+
+        .quality-header h3 {
+            font-size: 19px;
+
+            color: #111827;
+
+            margin-bottom: 5px;
+        }
+
+        .quality-header p {
+            font-size: 13px;
+
+            color: #6b7280;
+        }
+
+        .quality-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 15px;
+        }
+
+        .quality-item {
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            padding: 18px;
+        }
+
+        .quality-label {
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+        }
+
+        .quality-value {
+            font-size: 24px;
+
+            font-weight: bold;
+
+            color: #111827;
+        }
+
+
+        /* ==========================================
+           DISCLAIMER
+        ========================================== */
+
+        .disclaimer {
+            background: #fffbeb;
+
+            border: 1px solid #fde68a;
+
+            color: #92400e;
+
+            padding: 16px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* ==========================================
+           ACTIONS
+        ========================================== */
+
+        .actions {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            text-decoration: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 11px 18px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .back-btn {
+            background: #e5e7eb;
+
+            color: #374151;
+        }
+
+        .back-btn:hover {
+            background: #d1d5db;
+
+            transform: translateY(-1px);
+        }
+
+        .print-btn {
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .print-btn:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media(max-width: 1000px) {
+
+            .stats-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .quality-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+        }
+
+
+        @media(max-width: 700px) {
+
+            .header {
+                padding: 18px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .container {
+                padding: 0 15px;
+
+                margin-top: 22px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+
+                width: 100%;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+
+                text-align: center;
+            }
+        }
+
+
+        /* ==========================================
+           PRINT
+        ========================================== */
+
+        @media print {
+
+            .header,
+            .actions,
+            .dashboard-btn,
+            .disclaimer {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+
+                margin: 0;
+
+                padding: 0;
+            }
+
+            .insight-card,
+            .stat-card,
+            .quality-card {
+                box-shadow: none;
+
+                break-inside: avoid;
+            }
+
+            .summary {
+                border: 1px solid #ddd;
+            }
+        }
+        /* =========================================================
+   AI DASHBOARD INSIGHTS - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 22px 35px;
+    box-shadow: 0 8px 25px rgba(15,23,42,0.16);
+}
+
+.header h1 {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.header p {
+    color: #cbd5e1;
+}
+
+.dashboard-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    transition: all 0.25s ease;
+}
+
+.dashboard-btn:hover {
+    background: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0,0,0,0.15);
+}
+
+/* Main */
+.container {
+    max-width: 1250px;
+    margin-top: 35px;
+}
+
+/* Page title */
+.page-title {
+    margin-bottom: 25px;
+}
+
+.page-title h2 {
+    font-size: 31px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.page-title p {
+    color: #64748b;
+}
+
+/* AI badge */
+.ai-badge {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    box-shadow: 0 4px 10px rgba(4,120,87,0.07);
+}
+
+/* Statistics */
+.stats-grid {
+    gap: 18px;
+}
+
+.stat-card {
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    box-shadow: 0 8px 22px rgba(15,23,42,0.06);
+    transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: #bfdbfe;
+    box-shadow: 0 12px 28px rgba(37,99,235,0.10);
+}
+
+.stat-icon {
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    box-shadow: 0 4px 10px rgba(37,99,235,0.08);
+}
+
+.stat-label {
+    color: #64748b;
+    letter-spacing: 0.6px;
+}
+
+.stat-value {
+    font-size: 29px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* Insight card */
+.insight-card {
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid #dbeafe;
+    border-left: 5px solid #2563eb;
+    background: linear-gradient(135deg, #ffffff, #f8fbff);
+    box-shadow: 0 10px 28px rgba(37,99,235,0.08);
+}
+
+.card-header {
+    padding-bottom: 17px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.card-header h3 {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.local-ai {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border: 1px solid #bfdbfe;
+    box-shadow: 0 3px 8px rgba(37,99,235,0.06);
+}
+
+/* Summary */
+.summary {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #dbeafe;
+    border-radius: 13px;
+    padding: 24px;
+    line-height: 1.85;
+    color: #334155;
+    box-shadow: inset 0 1px 3px rgba(15,23,42,0.03);
+}
+
+/* Data quality */
+.quality-card {
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: 0 10px 28px rgba(15,23,42,0.06);
+}
+
+.quality-header {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.quality-header h3 {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.quality-header p {
+    color: #64748b;
+}
+
+.quality-grid {
+    gap: 18px;
+}
+
+.quality-item {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 20px;
+    transition: all 0.25s ease;
+}
+
+.quality-item:hover {
+    border-color: #bfdbfe;
+    background: #f8fbff;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(15,23,42,0.06);
+}
+
+.quality-label {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.quality-value {
+    font-size: 27px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* Disclaimer */
+.disclaimer {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(146,64,14,0.05);
+}
+
+/* Buttons */
+.actions {
+    margin-top: 25px;
+}
+
+.btn {
+    border-radius: 9px;
+    padding: 11px 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(15,23,42,0.08);
+    transition: all 0.25s ease;
+}
+
+.back-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.print-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.back-btn:hover,
+.print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(15,23,42,0.14);
+}
+
+.back-btn:hover {
+    background: #e2e8f0;
+}
+
+/* Mobile */
+@media(max-width: 700px) {
+
+    .header {
+        padding: 18px;
+    }
+
+    .container {
+        padding: 0 15px;
+        margin-top: 25px;
+    }
+
+    .page-title h2 {
+        font-size: 27px;
+    }
+
+    .insight-card,
+    .quality-card {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .summary {
+        padding: 18px;
+    }
+
+    .card-header {
+        align-items: flex-start;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dashboard-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Print */
+@media print {
+
+    .header,
+    .actions,
+    .dashboard-btn,
+    .disclaimer {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .insight-card,
+    .stat-card,
+    .quality-card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                ⚖️ AI Legal Case Management
+            </h1>
+
+            <p>
+                AI Dashboard Insights
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="dashboard-btn">
+
+            🏠 Dashboard
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ==========================================
+         MAIN CONTAINER
+    ========================================== -->
+
+    <div class="container">
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <h2>
+                🤖 AI Dashboard Insights
+            </h2>
+
+            <p>
+                General insights generated from the
+                case-management data stored in the system.
+            </p>
+
+        </div>
+
+
+
+        <!-- AI BADGE -->
+
+        <span class="ai-badge">
+
+            🤖 LOCAL AI • NO API REQUIRED
+
+        </span>
+
+
+
+        <!-- ======================================
+             STATISTICS
+        ====================================== -->
+
+        <div class="stats-grid">
+
+
+            <!-- TOTAL CASES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📁
+                </div>
+
+                <div class="stat-label">
+                    Total Cases
+                </div>
+
+                <div class="stat-value">
+                    {{ total_cases | default(0) }}
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL CASE NOTES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <div class="stat-label">
+                    Total Case Notes
+                </div>
+
+                <div class="stat-value">
+                    {{ total_notes | default(0) }}
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL HEARINGS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📅
+                </div>
+
+                <div class="stat-label">
+                    Total Hearings
+                </div>
+
+                <div class="stat-value">
+                    {{ total_hearings | default(0) }}
+                </div>
+
+            </div>
+
+
+
+            <!-- TOTAL DOCUMENTS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📄
+                </div>
+
+                <div class="stat-label">
+                    Total Documents
+                </div>
+
+                <div class="stat-value">
+                    {{ total_documents | default(0) }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             AI INSIGHTS
+        ====================================== -->
+
+        <div class="insight-card">
+
+
+            <div class="card-header">
+
+                <h3>
+                    📊 Dashboard Analysis
+                </h3>
+
+
+                <span class="local-ai">
+                    LOCAL CASE MANAGEMENT
+                </span>
+
+            </div>
+
+
+            <div class="summary">
+
+                {{ summary }}
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ======================================
+             DATA QUALITY
+        ====================================== -->
+
+        <div class="quality-card">
+
+
+            <div class="quality-header">
+
+                <h3>
+                    🔎 Data Quality Overview
+                </h3>
+
+                <p>
+                    Records that may need additional information.
+                </p>
+
+            </div>
+
+
+            <div class="quality-grid">
+
+
+                <div class="quality-item">
+
+                    <div class="quality-label">
+                        Cases Without Description
+                    </div>
+
+                    <div class="quality-value">
+                        {{ missing_descriptions | default(0) }}
+                    </div>
+
+                </div>
+
+
+
+                <div class="quality-item">
+
+                    <div class="quality-label">
+                        Cases Without Hearings
+                    </div>
+
+                    <div class="quality-value">
+                        {{ cases_without_hearings | default(0) }}
+                    </div>
+
+                </div>
+
+
+
+                <div class="quality-item">
+
+                    <div class="quality-label">
+                        Cases Without Documents
+                    </div>
+
+                    <div class="quality-value">
+                        {{ cases_without_documents | default(0) }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ======================================
+             DISCLAIMER
+        ====================================== -->
+
+        <div class="disclaimer">
+
+            <strong>⚠️ Important:</strong>
+
+            This feature provides general case-management
+            insights based only on information stored in the
+            system.
+
+            It does not use an external AI API and should not
+            be treated as legal advice.
+
+        </div>
+
+
+
+        <!-- ======================================
+             ACTIONS
+        ====================================== -->
+
+        <div class="actions">
+
+
+            <a href="{{ url_for('dashboard') }}"
+               class="btn back-btn">
+
+                ← Back to Dashboard
+
+            </a>
+
+
+            <button type="button"
+                    class="btn print-btn"
+                    onclick="window.print()">
+
+                🖨️ Print Insights
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Document</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        .header-content {
+            max-width: 850px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 23px;
+        }
+
+        .dashboard-btn {
+            background: #334155;
+            color: white;
+            text-decoration: none;
+
+            padding: 9px 14px;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .title {
+            font-size: 27px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            color: #334155;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37,99,235,0.10);
+        }
+
+        .file-box {
+            border: 2px dashed #cbd5e1;
+
+            border-radius: 10px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #f8fafc;
+        }
+
+        .file-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .file-box p {
+            color: #64748b;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .file-box input {
+            border: none;
+            padding: 5px;
+        }
+
+        .buttons {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 11px 18px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .upload-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .upload-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .back-btn {
+            background: #64748b;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background: #475569;
+        }
+
+        @media(max-width: 600px) {
+
+            .header {
+                padding: 18px 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .dashboard-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .container {
+                margin: 25px auto;
+                padding: 0 12px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .title {
+                font-size: 23px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+        /* =========================================================
+   UPLOAD DOCUMENT - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    padding: 22px 30px;
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.16);
+}
+
+.header-content {
+    max-width: 1250px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.dashboard-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: 10px 15px;
+    transition: all 0.25s ease;
+}
+
+.dashboard-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin-top: 35px;
+}
+
+/* Main card */
+.card {
+    background: rgba(255, 255, 255, 0.97);
+    padding: 34px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.07);
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 18px 42px rgba(15, 23, 42, 0.10);
+}
+
+/* Heading */
+.title {
+    font-size: 30px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 9px;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Form */
+.form-group {
+    margin-bottom: 22px;
+}
+
+label {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+select,
+input {
+    padding: 13px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0f172a;
+    transition: all 0.2s ease;
+}
+
+select:hover,
+input:hover {
+    border-color: #94a3b8;
+}
+
+select:focus,
+input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+    transform: translateY(-1px);
+}
+
+select {
+    cursor: pointer;
+}
+
+/* File upload area */
+.file-box {
+    border: 2px dashed #bfdbfe;
+    border-radius: 14px;
+    padding: 30px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f8fbff, #eff6ff);
+    transition: all 0.25s ease;
+}
+
+.file-box:hover {
+    border-color: #60a5fa;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.file-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #dbeafe, #eef2ff);
+    border: 1px solid #bfdbfe;
+    border-radius: 15px;
+
+    font-size: 29px;
+
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.08);
+}
+
+.file-box p {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.file-box input {
+    max-width: 100%;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+/* Buttons */
+.buttons {
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 23px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn {
+    padding: 12px 19px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.25s ease;
+    box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+}
+
+.upload-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.upload-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(37, 99, 235, 0.24);
+}
+
+.back-btn {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.back-btn:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(15, 23, 42, 0.10);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .header {
+        padding: 18px 15px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .container {
+        margin: 25px auto;
+        padding: 0 12px;
+    }
+
+    .card {
+        padding: 23px 20px;
+        border-radius: 16px;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+    }
+
+    .file-box {
+        padding: 25px 15px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>
+                ⚖️ Legal Case Management System
+            </h1>
+
+            <a href="{{ url_for('dashboard') }}"
+               class="dashboard-btn">
+
+                🏠 Dashboard
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <main class="container">
+
+        <div class="card">
+
+            <div class="title">
+                📤 Upload Document
+            </div>
+
+            <div class="subtitle">
+                Upload a document and associate it with a legal case
+            </div>
+
+
+            <form method="POST"
+                  action="{{ url_for('upload_document') }}"
+                  enctype="multipart/form-data">
+
+
+                <!-- CASE -->
+
+                <div class="form-group">
+
+                    <label for="case_id">
+                        Select Case
+                    </label>
+
+                    <select id="case_id"
+                            name="case_id"
+                            required>
+
+                        <option value="">
+                            -- Select Case --
+                        </option>
+
+                        {% for case in cases %}
+
+                        <option value="{{ case.case_id }}">
+
+                            {{ case.case_number }}
+                            -
+                            {{ case.title }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DOCUMENT NAME -->
+
+                <div class="form-group">
+
+                    <label for="document_name">
+                        Document Name
+                    </label>
+
+                    <input type="text"
+                           id="document_name"
+                           name="document_name"
+                           placeholder="Enter document name"
+                           required>
+
+                </div>
+
+
+                <!-- DOCUMENT TYPE -->
+
+                <div class="form-group">
+
+                    <label for="document_type">
+                        Document Type
+                    </label>
+
+                    <select id="document_type"
+                            name="document_type">
+
+                        <option value="">
+                            -- Select Type --
+                        </option>
+
+                        <option value="Court Order">
+                            Court Order
+                        </option>
+
+                        <option value="Evidence">
+                            Evidence
+                        </option>
+
+                        <option value="Petition">
+                            Petition
+                        </option>
+
+                        <option value="Affidavit">
+                            Affidavit
+                        </option>
+
+                        <option value="Agreement">
+                            Agreement
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- FILE -->
+
+                <div class="form-group">
+
+                    <label for="file">
+                        Select File
+                    </label>
+
+                    <div class="file-box">
+
+                        <div class="file-icon">
+                            📄
+                        </div>
+
+                        <p>
+                            Select the document file to upload
+                        </p>
+
+                        <input type="file"
+                               id="file"
+                               name="file"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="buttons">
+
+                    <button type="submit"
+                            class="btn upload-btn">
+
+                        📤 Upload Document
+
+                    </button>
+
+
+                    <a href="{{ url_for('documents') }}"
+                       class="btn back-btn">
+
+                        ← Back to Documents
+
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>

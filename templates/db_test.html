@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Database Test | Legal Case System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            color: #0f172a;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        /* CARD */
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+
+            box-shadow:
+                0 10px 30px rgba(15, 23, 42, 0.08);
+
+            border: 1px solid #e2e8f0;
+        }
+
+        /* HEADER */
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .success-icon {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 50%;
+
+            background: #dcfce7;
+            color: #16a34a;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .header h1 {
+            font-size: 27px;
+            color: #0f172a;
+        }
+
+        .header p {
+            margin-top: 5px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* STATUS */
+
+        .status {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+
+            padding: 16px 18px;
+
+            border-radius: 10px;
+
+            color: #166534;
+
+            font-weight: 600;
+
+            margin-bottom: 25px;
+        }
+
+        /* INFO GRID */
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .info-label {
+            color: #64748b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 20px;
+
+            font-weight: 700;
+
+            color: #0f172a;
+        }
+
+        /* DATABASE NAME */
+
+        .database-name {
+            color: #2563eb;
+        }
+
+        /* TABLE COUNT */
+
+        .table-count {
+            color: #16a34a;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            display: flex;
+
+            gap: 12px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn {
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 12px 18px;
+
+            border-radius: 9px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .dashboard-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .dashboard-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .database-btn {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .database-btn:hover {
+            background: #6d28d9;
+        }
+
+        /* ERROR */
+
+        .error {
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            color: #b91c1c;
+
+            padding: 18px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .header {
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+        }
+        /* =========================================================
+   DATABASE TEST - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Main card */
+.card {
+    max-width: 850px;
+    padding: 38px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.97);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+    transition: all 0.25s ease;
+}
+
+.card:hover {
+    box-shadow: 0 22px 52px rgba(15, 23, 42, 0.13);
+}
+
+/* Header */
+.header {
+    margin-bottom: 28px;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 17px;
+
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #15803d;
+
+    border: 1px solid #86efac;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    box-shadow: 0 8px 18px rgba(22, 101, 52, 0.10);
+}
+
+.header h1 {
+    font-size: 29px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+}
+
+.header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Success status */
+.status {
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1px solid #bbf7d0;
+    border-left: 5px solid #16a34a;
+    border-radius: 12px;
+
+    padding: 17px 18px;
+
+    color: #166534;
+    font-weight: 700;
+
+    box-shadow: 0 5px 14px rgba(22, 101, 52, 0.06);
+}
+
+/* Information cards */
+.info-grid {
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.info-box {
+    background: linear-gradient(135deg, #f8fafc, #ffffff);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 21px;
+
+    transition: all 0.25s ease;
+}
+
+.info-box:hover {
+    background: #f8fbff;
+    border-color: #bfdbfe;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.07);
+}
+
+.info-label {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+}
+
+.info-value {
+    font-size: 21px;
+    font-weight: 800;
+    margin-top: 3px;
+}
+
+.database-name {
+    color: #2563eb;
+}
+
+.table-count {
+    color: #16a34a;
+}
+
+/* Buttons */
+.buttons {
+    gap: 12px;
+    padding-top: 24px;
+}
+
+.btn {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+
+    box-shadow: 0 5px 13px rgba(15, 23, 42, 0.08);
+
+    transition: all 0.25s ease;
+}
+
+.dashboard-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.database-btn {
+    background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+.dashboard-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(37, 99, 235, 0.22);
+}
+
+.database-btn:hover {
+    background: linear-gradient(135deg, #6d28d9, #7c3aed);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(124, 58, 237, 0.22);
+}
+
+/* Error box */
+.error {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border: 1px solid #fecaca;
+    border-left: 5px solid #dc2626;
+
+    color: #b91c1c;
+
+    padding: 18px;
+    border-radius: 12px;
+
+    line-height: 1.6;
+
+    box-shadow: 0 5px 14px rgba(185, 28, 28, 0.06);
+}
+
+.error strong {
+    font-weight: 800;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .header {
+        gap: 12px;
+    }
+
+    .success-icon {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;
+        border-radius: 14px;
+        font-size: 26px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .status {
+        padding: 15px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-box {
+        padding: 18px;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <h1>
+                    Database Test
+                </h1>
+
+                <p>
+                    Legal Case Management System
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if error %}
+
+
+            <!-- ERROR -->
+
+            <div class="error">
+
+                ❌
+                <strong>
+                    Database Connection Failed
+                </strong>
+
+                <br><br>
+
+                {{ error }}
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- SUCCESS -->
+
+            <div class="status">
+
+                ✅ Database Connected Successfully!
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="info-grid">
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        DATABASE
+                    </div>
+
+                    <div class="info-value database-name">
+
+                        🗄️ {{ database_name }}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        TOTAL TABLES
+                    </div>
+
+                    <div class="info-value table-count">
+
+                        📋 {{ table_count }}
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a href="{{ url_for('dashboard') }}"
+                   class="btn dashboard-btn">
+
+                    🏠 Dashboard
+
+                </a>
+
+
+                <a href="{{ url_for('database') }}"
+                   class="btn database-btn">
+
+                    🗄️ Database
+
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add New Case</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #0f172a;
+        }
+
+        .header p {
+            margin: 6px 0 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #ffffff;
+            color: #2563eb;
+            border: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #eff6ff;
+            border-color: #2563eb;
+        }
+
+        /* Card */
+        .form-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+        }
+
+        /* Form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #1e293b;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Bottom buttons */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cancel-btn {
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+        }
+
+        .cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .save-btn {
+            padding: 11px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .save-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* Required */
+        .required {
+            color: #dc2626;
+        }
+
+        /* Mobile */
+        @media (max-width: 700px) {
+            .page {
+                padding: 20px 12px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .save-btn,
+            .cancel-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        /* =========================================================
+   ADD CASE PAGE - PROFESSIONAL UI POLISH
+   ========================================================= */
+
+body {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Page */
+.page {
+    padding: 45px 20px;
+}
+
+/* Header */
+.header {
+    margin-bottom: 28px;
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.header p {
+    font-size: 15px;
+    color: #64748b;
+}
+
+/* Back button */
+.back-btn {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+    box-shadow: 0 5px 14px rgba(15,23,42,0.06);
+    transition: all 0.25s ease;
+}
+
+.back-btn:hover {
+    background: #eff6ff;
+    border-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37,99,235,0.12);
+}
+
+/* Form card */
+.form-card {
+    border-radius: 20px;
+    padding: 32px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 14px 35px rgba(15,23,42,0.07);
+}
+
+/* Section title */
+.section-title {
+    font-size: 20px;
+    font-weight: 800;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Labels */
+label {
+    font-weight: 700;
+    color: #334155;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+    border-color: #94a3b8;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
+}
+
+/* Description */
+textarea {
+    line-height: 1.6;
+}
+
+/* Required */
+.required {
+    color: #dc2626;
+    font-weight: 800;
+}
+
+/* Form actions */
+.form-actions {
+    margin-top: 30px;
+    padding-top: 22px;
+}
+
+/* Cancel */
+.cancel-btn {
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(15,23,42,0.08);
+}
+
+/* Save */
+.save-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-radius: 10px;
+    padding: 12px 23px;
+    box-shadow: 0 6px 15px rgba(37,99,235,0.20);
+    transition: all 0.25s ease;
+}
+
+.save-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 20px rgba(37,99,235,0.28);
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .page {
+        padding: 25px 12px;
+    }
+
+    .header h1 {
+        font-size: 26px;
+    }
+
+    .form-card {
+        padding: 22px;
+        border-radius: 15px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <div>
+                <h1>➕ Add New Case</h1>
+                <p>Create and register a new legal case</p>
+            </div>
+
+            <a href="{{ url_for('cases') }}" class="back-btn">
+                ← Back to Cases
+            </a>
+
+        </div>
+
+
+        <!-- FORM CARD -->
+        <div class="form-card">
+
+            <div class="section-title">
+                Case Information
+            </div>
+
+            <form method="POST">
+
+                <div class="form-grid">
+
+                    <!-- CASE NUMBER -->
+                    <div class="form-group">
+
+                        <label>
+                            Case Number <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="case_number"
+                            placeholder="Example: CASE004"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CASE TITLE -->
+                    <div class="form-group">
+
+                        <label>
+                            Case Title <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Enter case title"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CASE TYPE -->
+                    <div class="form-group">
+
+                        <label>Case Type</label>
+
+                        <select name="case_type">
+
+                            <option value="Civil">Civil</option>
+                            <option value="Criminal">Criminal</option>
+                            <option value="Property">Property</option>
+                            <option value="Family">Family</option>
+                            <option value="Business">Business</option>
+                            <option value="Other">Other</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+                    <div class="form-group">
+
+                        <label>Status</label>
+
+                        <select name="status">
+
+                            <option value="Pending">Pending</option>
+                            <option value="Ongoing">Ongoing</option>
+                            <option value="Closed">Closed</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CLIENT -->
+                    <div class="form-group">
+
+                        <label>
+                            Client <span class="required">*</span>
+                        </label>
+
+                        <select name="client_id" required>
+
+                            <option value="">
+                                -- Select Client --
+                            </option>
+
+                            {% for client in clients %}
+
+                            <option value="{{ client.client_id }}">
+                                {{ client.name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- LAWYER -->
+                    <div class="form-group">
+
+                        <label>
+                            Lawyer <span class="required">*</span>
+                        </label>
+
+                        <select name="lawyer_id" required>
+
+                            <option value="">
+                                -- Select Lawyer --
+                            </option>
+
+                            {% for lawyer in lawyers %}
+
+                            <option value="{{ lawyer.lawyer_id }}">
+                                {{ lawyer.name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- FILING DATE -->
+                    <div class="form-group">
+
+                        <label>Filing Date</label>
+
+                        <input
+                            type="date"
+                            name="filing_date"
+                        >
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+                    <div class="form-group full-width">
+
+                        <label>Description</label>
+
+                        <textarea
+                            name="description"
+                            placeholder="Enter case description"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('cases') }}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        💾 Save Case
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
